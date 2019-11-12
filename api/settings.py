@@ -9,8 +9,8 @@ https://docs.djangoproject.com/en/2.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.2/ref/settings/
 """
-
 import os
+from datetime import timedelta
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -25,7 +25,7 @@ SECRET_KEY = '0jvr#p=!9=p@ziy^xkv)wx)33y02zx))-zy7li8ojm!=8_8el&'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['201751025.pythonanywhere.com']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     'accounts',
+    'complaint'
 ]
 
 MIDDLEWARE = [
@@ -131,3 +132,12 @@ REST_FRAMEWORK = {
 
 # Set our custom user model for auth
 AUTH_USER_MODEL = 'accounts.Profile'
+
+# Token settings
+SIMPLE_JWT = {
+    'USER_ID_FIELD': 'username',
+    'PAYLOAD_ID_FIELD': 'user_id',
+    'TOKEN_LIFETIME': timedelta(days=30),
+    'TOKEN_REFRESH_LIFETIME': timedelta(days=60),
+    'TOKEN_BACKEND': 'rest_framework_simplejwt.backends.TokenBackend',
+}
