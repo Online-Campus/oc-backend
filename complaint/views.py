@@ -7,6 +7,7 @@ from rest_framework.response import Response
 from rest_framework_simplejwt.authentication import JWTAuthentication
 
 from .models import Complaint
+from accounts.models import Profile
 from .serializers import ComplaintSerializer
 import json
 
@@ -19,4 +20,11 @@ class ListCreateComplaints(APIView):
     return Response(list.data)
 
   def post(self, request):
-    return HttpResponse('Create complaint...')
+    data = request.data
+    user = request.user
+    instance = ComplaintSerializer(data = data)
+    print(instance)
+    if instance.is_valid():
+      instance.create(validated_data = instance.data, user = user)
+      return HttpResponse('Ho gaya, dekh le')
+    return HttpResponse('Nai hua')

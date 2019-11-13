@@ -38,8 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'rest_framework_simplejwt',
     'accounts',
+    'rest_framework_simplejwt',
     'complaint'
 ]
 
@@ -137,7 +137,7 @@ AUTH_USER_MODEL = 'accounts.Profile'
 SIMPLE_JWT = {
     'USER_ID_FIELD': 'username',
     'PAYLOAD_ID_FIELD': 'user_id',
-    'TOKEN_LIFETIME': timedelta(days=30),
+    'ACCESS_TOKEN_LIFETIME': timedelta(days=30),
     'TOKEN_REFRESH_LIFETIME': timedelta(days=60),
     'TOKEN_BACKEND': 'rest_framework_simplejwt.backends.TokenBackend',
 }
