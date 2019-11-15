@@ -23,8 +23,7 @@ class ListCreateComplaints(APIView):
     data = request.data
     user = request.user
     instance = ComplaintSerializer(data = data)
-    print(instance)
     if instance.is_valid():
-      instance.create(validated_data = instance.data, user = user)
-      return HttpResponse('Ho gaya, dekh le')
-    return HttpResponse('Nai hua')
+      obj = instance.create(validated_data = instance.data, user = user)
+      return Response({'status': 200, 'message': 'Object created.', 'data': obj})
+    return Response({'status': 400, 'message': 'Error creating the object'})
