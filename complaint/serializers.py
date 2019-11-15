@@ -14,3 +14,9 @@ class ComplaintSerializer(serializers.ModelSerializer):
     data['owner'] = user
     instance = Complaint.objects.create(**data)
     return instance
+
+class ComplaintUpdateSerializer(serializers.ModelSerializer):
+  class Meta:
+    model = Complaint
+    fields = '__all__'
+    extra_kwargs = {'title': {'read_only': True}, 'owner': {'read_only': True}, 'description': {'read_only': True}}

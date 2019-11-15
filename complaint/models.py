@@ -15,7 +15,7 @@ class Complaint(models.Model):
   owner = models.ForeignKey(Profile, related_name="created_by_owner", on_delete=models.CASCADE, blank=True)
   description = models.TextField()
   created_at = models.DateTimeField(auto_now_add=True)
-  last_modified = models.DateTimeField(auto_now_add=True)
+  last_modified = models.DateTimeField(auto_now=True)
   status = models.CharField(max_length=20, choices=COMPLAINT_STATUS, default="submitted")
 
   def __str__(self):
