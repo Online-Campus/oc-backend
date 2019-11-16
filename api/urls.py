@@ -20,5 +20,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('auth/', include('accounts.urls')),
     path('complaint/', include('complaint.urls')),
-    path('messmenu/', include('messmenu.urls'))
+    path('messmenu/', include('messmenu.urls')),
+    path('leave/', include('leave.urls'))
 ]
