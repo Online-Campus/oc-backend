@@ -14,9 +14,9 @@ class ProfileSerializer(serializers.ModelSerializer):
 
   def validate(self, data):
     print('VALIDATING')
-    if data.first_name == '':
+    if data['first_name'] == '':
       return serializers.ValidationError('First name is a required field')
-    if data.last_name == '':
+    if data['last_name'] == '':
       return serializers.ValidationError('Last name is a required field')
     return data
 
