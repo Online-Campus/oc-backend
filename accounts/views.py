@@ -50,3 +50,12 @@ class getUpdateUserView(generics.RetrieveUpdateAPIView):
 
 class TokenObtainView(TokenObtainPairView):
   permission_classes = (AllowAny,)
+
+class VerifyAccount(APIView):
+  permission_classes = (AllowAny,)
+
+  def get(self, request, pk):
+    profile = Profile.objects.get(pk=pk)
+    profile.is_verified = True
+    profile.save()
+    return HttpResponse("Your account is now verified!")

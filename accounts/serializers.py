@@ -1,5 +1,13 @@
 from .models import Profile
 from rest_framework import serializers
+import os
+from sendgrid import SendGridAPIClient
+from sendgrid.helpers.mail import Mail
+from string import Template
+
+
+verification_subject = Template('Hi $name, please verify your account for Online Campus.')
+verification_content = Template('Greetings $name!<br>Please verify your account for Online Campus <a href=\'https://201751025.pythonanywhere.com/auth/verify/$pk\'>here</a>.<br>Regards,<br>Online Campus Team')
 
 # Serializer for student user
 class ProfileSerializer(serializers.ModelSerializer):
@@ -10,10 +18,28 @@ class ProfileSerializer(serializers.ModelSerializer):
 
   def create(self, validated_data):
     user = Profile.objects.create_user(**validated_data)
+
+    # Send verification mail
+    mail = Mail(
+      from_email='verify@onlinecampus.com',
+      to_emails=user.email,
+      subject=verification_subject.substitute(name=user.first_name),
+      html_content=verification_content.substitute(name=user.first_name, pk=user.pk))
+
+    try:
+      sg = SendGridAPIClient('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')
+      res = sg.send(mail)
+      print(res)
+    except Exception as e:
+      print(e.message)
+
+    if user.account_type != "student":
+      admins = Profile.objects.filter(is_staff=True)
+      for admin in admins:
+        print(admin.email)
     return user
 
   def validate(self, data):
-    print('VALIDATING')
     if data['first_name'] == '':
       return serializers.ValidationError('First name is a required field')
     if data['last_name'] == '':
