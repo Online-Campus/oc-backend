@@ -17,6 +17,7 @@ class Complaint(models.Model):
   created_at = models.DateTimeField(auto_now_add=True)
   last_modified = models.DateTimeField(auto_now=True)
   status = models.CharField(max_length=20, choices=COMPLAINT_STATUS, default="submitted")
+  remark = models.TextField(blank=True)
 
   def __str__(self):
     return "%s, %s" % (self.title, self.owner.username)
