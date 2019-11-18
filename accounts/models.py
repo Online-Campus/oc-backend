@@ -6,7 +6,7 @@ from .managers import ProfileManager
 ACCOUNT_TYPES = [
   ("student", "Student"),
   ("faculty", "Faculty"),
-  ("hostel_staff", "Hostel Staff"),
+  ("admin", "Admin"),
   ("mess_staff", "Mess Staff"),
 ]
 

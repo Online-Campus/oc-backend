@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'complaint',
     'messmenu',
-    'leave'
+    'leave',
+    'dates'
 ]
 
 MIDDLEWARE = [
