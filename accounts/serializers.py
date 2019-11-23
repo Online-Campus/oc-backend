@@ -27,9 +27,9 @@ class ProfileSerializer(serializers.ModelSerializer):
       html_content=verification_content.substitute(name=user.first_name, pk=user.pk))
 
     try:
-      sg = SendGridAPIClient('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')
+      print(os.getenv('SENDGRID_API_KEY'))
+      sg = SendGridAPIClient(os.environ.get('SENDGRID_API_KEY'))
       res = sg.send(mail)
-      print(res)
     except Exception as e:
       print(e.message)
 

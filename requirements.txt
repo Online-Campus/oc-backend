@@ -2,3 +2,4 @@ django
 djangorestframework
 djangorestframework-simplejwt
 sendgrid
+python-dotenv
