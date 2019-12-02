@@ -16,10 +16,13 @@ import json
 class ListCreateComplaints(APIView):
   authentication_classes=(JWTAuthentication,)
   permission_classes=(IsAuthenticated,)
+
+  # Get all complaints
   def get(self, request):
     list = ComplaintSerializer(Complaint.objects.filter(owner = request.user), many=True)
     return Response(list.data)
 
+  # Create a new complaint
   def post(self, request):
     data = request.data
     user = request.user

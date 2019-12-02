@@ -11,6 +11,7 @@ ACCOUNT_TYPES = [
 ]
 
 # User model
+# Inherits the AbstractUser model
 class Profile(AbstractUser):
   bio = models.TextField(max_length=256, blank=True)
   birth_date = models.DateField(blank=True, null=True)
@@ -23,9 +24,11 @@ class Profile(AbstractUser):
   # User custom manager
   objects = ProfileManager()
 
+  # For admin interface
   class Meta:
     verbose_name = "profile"
     verbose_name_plural = "profiles"
 
+  # To display objects from this model
   def __str__(self):
     return "%s %s, %s" % (self.first_name, self.last_name, self.username)

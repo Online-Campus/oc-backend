@@ -17,10 +17,21 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
+    # Path to the admin interface
     path('admin/', admin.site.urls),
+
+    # Path to authentication endpoints
     path('auth/', include('accounts.urls')),
+
+    # Path to complaint endpoints
     path('complaint/', include('complaint.urls')),
+
+    # Path to mess menu endpoints
     path('messmenu/', include('messmenu.urls')),
+
+    # Path to leave endpoints
     path('leave/', include('leave.urls')),
+
+    # Path to dates endpoints
     path('dates/', include('dates.urls'))
 ]

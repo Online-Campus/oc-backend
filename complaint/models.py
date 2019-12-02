@@ -19,5 +19,6 @@ class Complaint(models.Model):
   status = models.CharField(max_length=20, choices=COMPLAINT_STATUS, default="submitted")
   remark = models.TextField(blank=True)
 
+  # Function used to customize how objects from this model will be displayed
   def __str__(self):
     return "%s, %s" % (self.title, self.owner.username)

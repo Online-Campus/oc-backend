@@ -13,12 +13,15 @@ from .serializers import ProfileSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework_simplejwt.authentication import JWTAuthentication
 
+
+# View to create a new user
 class register_view(generics.CreateAPIView):
   permission_classes = (AllowAny,)
 
   queryset = Profile.objects.all()
   serializer_class = ProfileSerializer
 
+# View to get or update current user using token
 class getUpdateUserView(generics.RetrieveUpdateAPIView):
   authentication_classes = (JWTAuthentication,)
   permission_classes = (IsAuthenticated,)
@@ -48,9 +51,11 @@ class getUpdateUserView(generics.RetrieveUpdateAPIView):
     user = ProfileSerializer(current_user)
     return Response({'current_user': user.data})
 
+# View to get tokens
 class TokenObtainView(TokenObtainPairView):
   permission_classes = (AllowAny,)
 
+# View to verify accounts using email links
 class VerifyAccount(APIView):
   permission_classes = (AllowAny,)
 

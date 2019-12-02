@@ -1,5 +1,6 @@
 from django.contrib.auth.models import BaseUserManager
 
+# Create custom migrations for our custom Profile model
 class ProfileManager(BaseUserManager):
   use_in_migrations = True
 
@@ -11,10 +12,12 @@ class ProfileManager(BaseUserManager):
     user.save(using=self._db)
     return user
 
+  # Override create_user method
   def create_user(self, password, **extra_fields):
     extra_fields.setdefault('is_superuser', False)
     return self._create_user(password, **extra_fields)
 
+  # Override create_superuser method
   def create_superuser(self, password, **extra_fields):
     extra_fields.setdefault('is_superuser', True)
     extra_fields.setdefault('is_staff', True)

@@ -5,7 +5,7 @@ from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail
 from string import Template
 
-
+# HTML templates for emails
 verification_subject = Template('Hi $name, please verify your account for Online Campus.')
 verification_content = Template('Greetings $name!<br>Please verify your account for Online Campus <a href=\'https://201751025.pythonanywhere.com/auth/verify/$pk\'>here</a>.<br>Regards,<br>Online Campus Team')
 
@@ -27,7 +27,8 @@ class ProfileSerializer(serializers.ModelSerializer):
       html_content=verification_content.substitute(name=user.first_name, pk=user.pk))
 
     try:
-      print(os.getenv('SENDGRID_API_KEY'))
+      # Send mail using Sendgrid
+      # API key stored in .env
       sg = SendGridAPIClient(os.environ.get('SENDGRID_API_KEY'))
       res = sg.send(mail)
     except Exception as e:
@@ -36,6 +37,7 @@ class ProfileSerializer(serializers.ModelSerializer):
     if user.account_type != "student":
       admins = Profile.objects.filter(is_staff=True)
       for admin in admins:
+        # TODO: Send emails for admin verification of accounts
         print(admin.email)
     return user
 
