@@ -32,7 +32,7 @@ class ProfileSerializer(serializers.ModelSerializer):
       sg = SendGridAPIClient(os.environ.get('SENDGRID_API_KEY'))
       res = sg.send(mail)
     except Exception as e:
-      print(e.message)
+      print(e)
 
     if user.account_type != "student":
       admins = Profile.objects.filter(is_staff=True)
